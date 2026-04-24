@@ -1,0 +1,56 @@
+# TomeVault vault-rules v1 — command
+# AST10 mapping: AST-02, AST-08
+# Exported from scripts/security_scan.py on 2026-04-24
+
+category: command
+ast10: ['AST-02', 'AST-08']
+rules:
+  - id: rm_rf
+    severity: critical
+    pattern: "rm\\s+-r?f\\s+/"
+    flags: [IGNORECASE]
+  - id: rm_rf_wildcard
+    severity: high
+    pattern: "rm\\s+-r?f\\s+[*~]"
+  - id: curl_pipe_bash
+    severity: medium
+    pattern: "curl\\s+[^|]{0,500}\\|\\s*(?:ba)?sh"
+    flags: [IGNORECASE]
+  - id: wget_pipe_sh
+    severity: critical
+    pattern: "wget\\s+[^|]{0,500}\\|\\s*(?:ba)?sh"
+    flags: [IGNORECASE]
+  - id: curl_pipe_python
+    severity: high
+    pattern: "curl\\s+[^|]{0,500}\\|\\s*python"
+    flags: [IGNORECASE]
+  - id: chmod_777
+    severity: medium
+    pattern: "chmod\\s+777"
+  - id: dd_destructive
+    severity: critical
+    pattern: "dd\\s+if=/dev/(?:zero|random)\\s+of=/"
+  - id: mkfs
+    severity: critical
+    pattern: "mkfs\\."
+  - id: iptables_flush
+    severity: high
+    pattern: "iptables\\s+-F"
+  - id: kill_all
+    severity: medium
+    pattern: "(?:killall|pkill)\\s+-9"
+  - id: format_disk
+    severity: critical
+    pattern: "format\\s+[cCdD]:"
+    flags: [IGNORECASE]
+  - id: eval_exec
+    severity: medium
+    pattern: "(?:eval|exec)\\s*\\([^)]{0,200}(?:curl|wget|fetch)"
+    flags: [IGNORECASE]
+  - id: sudo_nopasswd
+    severity: high
+    pattern: "NOPASSWD"
+    flags: [IGNORECASE]
+  - id: disable_firewall
+    severity: high
+    pattern: "(?:ufw\\s+disable|systemctl\\s+stop\\s+firewalld)"

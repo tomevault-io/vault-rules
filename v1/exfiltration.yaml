@@ -1,0 +1,37 @@
+# TomeVault vault-rules v1 — exfiltration
+# AST10 mapping: AST-06, AST-10
+# Exported from scripts/security_scan.py on 2026-04-24
+
+category: exfiltration
+ast10: ['AST-06', 'AST-10']
+rules:
+  - id: send_env_to_url
+    severity: critical
+    pattern: "(?:send|post|upload|exfiltrate)[^.]{0,80}\\.env[^.]{0,80}(?:http|url|endpoint)"
+    flags: [IGNORECASE]
+  - id: curl_post_data
+    severity: high
+    pattern: "curl\\s+[^|]{0,200}-(?:d|X\\s*POST)\\s+[^|]{0,200}(?:\\.env|credentials|secret|token|password)"
+    flags: [IGNORECASE]
+  - id: webhook_exfil
+    severity: high
+    pattern: "(?:webhook|discord\\.com/api/webhooks|hooks\\.slack\\.com)[^|]{0,200}(?:send|post|file_content)"
+    flags: [IGNORECASE]
+  - id: exfiltrate_keyword
+    severity: high
+    pattern: "exfiltrat"
+    flags: [IGNORECASE]
+  - id: send_to_server
+    severity: medium
+    pattern: "(?:send|transmit|upload)\\s+(?:all\\s+)?(?:file|data|content|code)[^|]{0,100}(?:to|server|endpoint|api)"
+    flags: [IGNORECASE]
+  - id: nc_reverse_shell
+    severity: critical
+    pattern: "(?:nc|ncat|netcat)\\s+[^|]{0,200}-e\\s+/bin/"
+  - id: python_reverse_shell
+    severity: critical
+    pattern: "socket\\.connect\\s*\\([^)]{0,100}\\)[^;]{0,200}subprocess"
+    flags: [IGNORECASE]
+  - id: base64_pipe_exec
+    severity: critical
+    pattern: "base64\\s+(?:-d|--decode)\\s*.*\\|\\s*(?:ba)?sh"

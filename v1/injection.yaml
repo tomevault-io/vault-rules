@@ -1,0 +1,47 @@
+# TomeVault vault-rules v1 — injection
+# AST10 mapping: AST-01
+# Exported from scripts/security_scan.py on 2026-04-24
+
+category: injection
+ast10: ['AST-01']
+rules:
+  - id: ignore_instructions
+    severity: high
+    pattern: "ignore\\s+(?:all\\s+)?(?:previous|above|prior)\\s+instructions"
+    flags: [IGNORECASE]
+  - id: disregard_prompt
+    severity: high
+    pattern: "disregard\\s+(?:your\\s+)?(?:system\\s+)?prompt"
+    flags: [IGNORECASE]
+  - id: override_safety
+    severity: high
+    pattern: "override\\s+(?:your\\s+)?safety"
+    flags: [IGNORECASE]
+  - id: you_are_now
+    severity: medium
+    pattern: "you\\s+are\\s+now\\s+(?:DAN|a\\s+new|an?\\s+unrestricted)"
+    flags: [IGNORECASE]
+  - id: jailbreak_keyword
+    severity: high
+    pattern: "(?:jailbreak|jail\\s*break|do\\s+anything\\s+now)"
+    flags: [IGNORECASE]
+  - id: pretend_no_restrict
+    severity: high
+    pattern: "pretend\\s+(?:you\\s+)?(?:have\\s+)?no\\s+restrictions"
+    flags: [IGNORECASE]
+  - id: developer_mode
+    severity: medium
+    pattern: "(?:enter|enable|activate)\\s+developer\\s+mode"
+    flags: [IGNORECASE]
+  - id: forget_rules
+    severity: high
+    pattern: "forget\\s+(?:all\\s+)?(?:your\\s+)?(?:rules|guidelines|constraints)"
+    flags: [IGNORECASE]
+  - id: new_persona
+    severity: medium
+    pattern: "from\\s+now\\s+on[^.]{0,100}(?:you\\s+(?:are|will|must)|your\\s+(?:name|role|purpose))"
+    flags: [IGNORECASE]
+  - id: hidden_html_comment
+    severity: medium
+    pattern: "<!--[^>]*(?:ignore|override|disregard|hidden|secret)[^>]*-->"
+    flags: [IGNORECASE]

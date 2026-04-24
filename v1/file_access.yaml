@@ -1,0 +1,31 @@
+# TomeVault vault-rules v1 — file_access
+# AST10 mapping: AST-06, AST-07
+# Exported from scripts/security_scan.py on 2026-04-24
+
+category: file_access
+ast10: ['AST-06', 'AST-07']
+rules:
+  - id: read_etc_passwd
+    severity: high
+    pattern: "(?:read|cat|head|tail|less|more)\\s+/etc/(?:passwd|shadow|sudoers)"
+  - id: read_ssh_keys
+    severity: high
+    pattern: "(?:read|cat|head|tail|print)\\s+.*\\.ssh/(?:id_rsa|id_ed25519|authorized_keys)"
+  - id: read_env_file
+    severity: medium
+    pattern: "(?:read|cat|head|tail|print)\\s+.*\\.env\\b"
+  - id: read_credentials
+    severity: high
+    pattern: "(?:read|cat|head|tail|print)\\s+.*(?:credentials|secrets?)\\.(?:json|yaml|yml|xml|conf)"
+  - id: access_proc
+    severity: medium
+    pattern: "(?:read|cat)\\s+/proc/(?:self|[0-9]+)/"
+  - id: history_access
+    severity: medium
+    pattern: "(?:read|cat|head|tail)\\s+.*\\.(?:bash_history|zsh_history)"
+  - id: docker_socket
+    severity: high
+    pattern: "/var/run/docker\\.sock"
+  - id: kube_config
+    severity: high
+    pattern: "(?:read|cat)\\s+.*\\.kube/config"

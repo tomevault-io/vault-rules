@@ -1,0 +1,23 @@
+# TomeVault vault-rules v1 — obfuscation
+# AST10 mapping: AST-01, AST-03
+# Exported from scripts/security_scan.py on 2026-04-24
+
+category: obfuscation
+ast10: ['AST-01', 'AST-03']
+rules:
+  - id: base64_blob
+    severity: medium
+    pattern: "(?:base64[_-]?(?:decode|d)|atob)\\s*[\\(]?\\s*[\"\\'][A-Za-z0-9+/=]{60,}[\"\\']"
+  - id: hex_encoded
+    severity: medium
+    pattern: "(?:\\\\x[0-9a-fA-F]{2}){10,}"
+  - id: zero_width_chars
+    severity: high
+    pattern: "[\\u200b\\u200c\\u200d\\u2060\\ufeff]{3,}"
+  - id: mixed_scripts
+    severity: low
+    pattern: "[\\u0400-\\u04ff\\u0370-\\u03ff].*[a-zA-Z]|[a-zA-Z].*[\\u0400-\\u04ff\\u0370-\\u03ff]"
+  - id: encoded_url
+    severity: medium
+    pattern: "(?:%68%74%74%70|%48%54%54%50)"
+    flags: [IGNORECASE]
