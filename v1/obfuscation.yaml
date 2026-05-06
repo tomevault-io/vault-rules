@@ -21,3 +21,13 @@ rules:
     severity: medium
     pattern: "(?:%68%74%74%70|%48%54%54%50)"
     flags: [IGNORECASE]
+  # v1.1.0 — RFC-001 trivial-tier (2026-05-06)
+  - id: b64_pipe_shell_payload
+    severity: critical
+    pattern: "echo\\s+[\"\\']?[A-Za-z0-9+/=]{60,}[\"\\']?\\s*\\|\\s*base64\\s+(?:-D|-d|--decode)\\s*\\|\\s*(?:ba|z|fi|t?c|k)?sh\\b"
+  - id: b64decode_then_exec
+    severity: critical
+    pattern: "(?:base64\\.b64decode|atob)\\s*\\([^)]+\\)[\\s\\S]{0,200}\\bexec\\s*\\("
+  - id: compile_exec_string
+    severity: critical
+    pattern: "\\bcompile\\s*\\([^)]*?,\\s*[\"\\']<string>[\"\\'],\\s*[\"\\']exec[\"\\']\\s*\\)"

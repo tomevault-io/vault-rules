@@ -29,3 +29,15 @@ rules:
   - id: kube_config
     severity: high
     pattern: "(?:read|cat)\\s+.*\\.kube/config"
+  # v1.1.0 — RFC-001 trivial-tier (2026-05-06)
+  # Broader path-mention rules (no read/cat verb required) — catch attempts that
+  # don't use cat/read explicitly (e.g., open() in Python, > redirects in shell).
+  - id: ssh_key_path_ref
+    severity: high
+    pattern: "\\.ssh/(?:id_rsa|id_ed25519|id_dsa|authorized_keys|known_hosts)\\b"
+  - id: aws_creds_path_ref
+    severity: high
+    pattern: "\\.aws/(?:credentials|config)\\b"
+  - id: passwd_path_ref
+    severity: critical
+    pattern: "/etc/(?:passwd|shadow|sudoers)\\b"

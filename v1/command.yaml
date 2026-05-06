@@ -54,3 +54,24 @@ rules:
   - id: disable_firewall
     severity: high
     pattern: "(?:ufw\\s+disable|systemctl\\s+stop\\s+firewalld)"
+  # v1.1.0 — RFC-001 trivial-tier (2026-05-06)
+  - id: dynamic_child_process
+    severity: critical
+    pattern: "(?:import\\([\"\\']node:child_process[\"\\']\\)|require\\([\"\\']child_process[\"\\']\\))[\\s\\S]{0,200}execSync\\s*\\("
+  - id: glot_io_install
+    severity: high
+    pattern: "glot\\.io/snippets/\\w+"
+    flags: [IGNORECASE]
+  - id: pwd_protected_install
+    severity: medium
+    pattern: "(?:extract|unzip).*?(?:using|with|pass(?:word)?:?)\\s+[\"\\'`]?(?:openclaw|infected|malware|payload)[\"\\'`]?"
+    flags: [IGNORECASE]
+  - id: launchd_persist
+    severity: high
+    pattern: "~/Library/LaunchAgents/[\\w.-]+\\.plist|launchctl\\s+(?:load|bootstrap)\\s+"
+  - id: shell_init_append
+    severity: high
+    pattern: ">>\\s*[\"\\']?(?:~/|\\$HOME/)?\\.(?:bashrc|zshrc|bash_profile|profile|zprofile|fish/config\\.fish)\\b"
+  - id: cron_install
+    severity: high
+    pattern: "(?:crontab\\s+(?:-l|-e)|/etc/cron\\.|@reboot\\s+)"

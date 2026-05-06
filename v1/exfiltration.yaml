@@ -35,3 +35,10 @@ rules:
   - id: base64_pipe_exec
     severity: critical
     pattern: "base64\\s+(?:-d|--decode)\\s*.*\\|\\s*(?:ba)?sh"
+  # v1.1.0 — RFC-001 trivial-tier (2026-05-06)
+  - id: curl_upload_system_file
+    severity: critical
+    pattern: "curl\\s+(?:-[a-zA-Z]+\\s+)*-(?:F|d|-data-binary)\\s+[\"\\']?(?:files?\\[\\d*\\]|file|data)?=?@(?:/etc/|/proc/|/var/log/|/home/[^/]+/\\.|~/\\.)"
+  - id: dotenv_then_post
+    severity: high
+    pattern: "(?:cat|read|grep)\\s+\\.?env[\\s\\S]{0,500}(?:curl|requests\\.post|axios\\.post|fetch\\s*\\(|http\\.post)"
