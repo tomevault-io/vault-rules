@@ -31,7 +31,7 @@ The AST10 category mapping appears at the top of each YAML file.
 
 ## Proposing a change
 
-Open an issue using the RFC template (see [`RFC.md`](RFC.md)). The TomeVault Policy Council reviews per the process described at [tomevault.io/policy/council](https://tomevault.io/policy/council).
+Open an issue using the RFC template (see [`RFC.md`](RFC.md)). Changes ratify per the process described at [tomevault.io/standards/ratification](https://tomevault.io/standards/ratification).
 
 Ratified changes land as tagged releases (`v1.0.0`, `v1.1.0`, ...). Scanners pick up the latest ratified release automatically on the next scan cycle.
 

@@ -1,6 +1,6 @@
 # Proposing a rule change (RFC)
 
-Changes to the vault-rules scan ruleset pass through a public RFC process. The full ratification process is documented at [tomevault.io/standards/council](https://tomevault.io/standards/council).
+Changes to the vault-rules scan ruleset pass through a public RFC process. The full ratification process is documented at [tomevault.io/standards/ratification](https://tomevault.io/standards/ratification).
 
 ## Who can propose
 

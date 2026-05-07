@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/), and the 
 
 ## [1.1.0] — 2026-05-06
 
-RFC-001 trivial-tier ratification. Authored by an LLM rule-set reviewer pass over the [DataDog `ai-skills` malicious corpus benchmark](https://tomevault.io/transparency/datadog-ai-skills-2026-05-06) (n=204, snapshot 2026-05-06), validated against a 1,000-file random sample of TomeVault production pass-graded files (per-rule false-positive rate ≤ 0.5%). Phase 2 (rules introducing new categories or first-of-kind behavioural patterns) deferred to vault-rules v1.2 pending Policy Council Security Lead seat fill.
+RFC-001 trivial-tier ratification. Authored by an LLM rule-set reviewer pass over the [DataDog `ai-skills` malicious corpus benchmark](https://tomevault.io/transparency/datadog-ai-skills-2026-05-06) (n=204, snapshot 2026-05-06), validated against a 1,000-file random sample of TomeVault production pass-graded files (per-rule false-positive rate ≤ 0.5%). Phase 2 (rules introducing new categories or first-of-kind behavioural patterns) is queued for vault-rules v1.2 — to ship under the public 7-day RFC comment window.
 
 Benchmark impact: 24.0% → 39.2% true positive rate on the same corpus, precision unchanged (0 false positives on labeled-safe subset).
 
@@ -45,14 +45,14 @@ Broader path-mention rules (no read/cat verb required) catch attempts that don't
 - `curl_pipe_any_shell` — broad pattern matched legitimate first-party installers. Will return in v1.2 with an allowlist of known-good installer hosts.
 - `exfil_send_seed_phrase` — matched skills *warning against* sharing private keys. Will return in v1.2 with imperative-voice tightening.
 
-### Deferred to vault-rules v1.2 (Phase 2 — awaiting Security Lead seat)
+### Queued for vault-rules v1.2 (Phase 2)
 
-Per the [Policy Council standard](https://tomevault.io/standards/council), non-trivial RFCs wait for the Security Lead seat.
+Phase 2 introduces new categories and first-of-kind behavioural patterns. It will ship under the public 7-day RFC comment window described at [tomevault.io/standards/ratification](https://tomevault.io/standards/ratification).
 
 - `self_labelled_malicious` (high, new category `self_disclosure`) — 8 catches in benchmark
 - `hidden_from_user` (high, social_engineering) — first behavioural-language rule
 - `imperative_must_execute` (medium, social_engineering) — broader FP review needed
-- `autonomous_trading_bot` (medium, new category `financial_risk`) — 10 catches; Council vote needed on flag-vs-block policy
+- `autonomous_trading_bot` (medium, new category `financial_risk`) — 10 catches; flag-vs-block policy decision pending
 - `webhook_with_system_file` (critical, exfiltration composite)
 - `gh_token_with_network` (high, exfiltration composite)
 
